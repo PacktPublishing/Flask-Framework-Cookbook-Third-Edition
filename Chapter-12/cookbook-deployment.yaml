@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: cookbook-recipe
+  name: cookbook-recipe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cookbook-recipe
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: cookbook-recipe
+    spec:
+      containers:
+      - image: cookbook:latest
+        name: cookbook
+        resources: {}
+        imagePullPolicy: Never
+status: {}
