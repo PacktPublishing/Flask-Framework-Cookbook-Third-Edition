@@ -1,0 +1,52 @@
+{% extends 'home.html' %}
+
+{% block container %}
+  <div class="top-pad">
+    <ul class="list-group" id="chat-list">
+      <li class="list-group-item">
+        <span class="badge">GPT</span>
+        How can I help you?
+      </li>
+    </ul>
+    <div class="input-group">
+      <input type="text" class="form-control" name="message" placeholder="Enter your message" aria-describedby="chat-input">
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="button" data-loading-text="Loading..." id="send-message">Send</button>
+      </span>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+function appendToChatList(mode, message) {
+  $( "#chat-list" ).append( '<li class="list-group-item"><span class="badge">' + mode + '</span>' + message + '</li>' );
+}
+$(document).ready(function(){
+  $('button#send-message').click(function() {
+    var send_btn = $(this).button('loading');
+    const inputChat = document.querySelector( 'input[name="message"]' );
+    var message = inputChat.value;
+
+    appendToChatList('Human', message);
+
+    inputChat.value = '';
+
+    $.ajax({
+      url: '{{ url_for("catalog.chat_gpt") }}',
+      type: 'POST',
+      dataType: "json",
+      data: {
+          msg: message
+      }
+    })
+    .done(function(data) {
+      appendToChatList('GPT', data.message);
+      send_btn.button('reset');
+    });
+
+  });
+});
+</script>
+{% endblock %}

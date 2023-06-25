@@ -1,0 +1,43 @@
+{% extends 'home.html' %}
+
+{% block container %}
+  <div class="top-pad">
+    <form
+        class="form-horizontal"
+        role="form">
+      <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Query</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control awesomplete" id="query" name="query">
+        </div>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+$(document).ready(function(){
+
+  const input = document.querySelector( 'input[name="query"]' );
+
+  const awesomplete = new Awesomplete( input, { tabSelect: true, minChars: 5 } );
+  
+  function ajaxResults() {
+    $.ajax({
+        url: '{{ url_for("catalog.product_search_gpt") }}',
+        type: 'POST',
+        dataType: "json",
+        data: {
+            query: input.value
+        }
+    })
+    .done(function(data) {
+        awesomplete.list = data;
+    });
+  };
+
+  input.addEventListener( 'keyup', ajaxResults );
+});
+</script>
+{% endblock %}
