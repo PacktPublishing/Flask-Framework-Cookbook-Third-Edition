@@ -38,7 +38,7 @@ PRODUCTS = {
 **Following is what you need for this book:**
 If you are a web developer seeking to expand your knowledge of developing scalable and production-ready applications in Flask, this is the book for you. It is also highly valuable if you are already aware of Flask's major extensions and want to leverage them for better application development. This book will come handy as a quick reference for specific topic on Flask, its popular extensions, or specific use cases. It assumes basic Python programming experience, as well as familiarity with web development and related terminology.
 
-With the following software and hardware list you can run all code files present in the book (Chapter 1-12).
+With the following software and hardware list you can run all code files present in the book (Chapter 1-14).
 
 ### Software and Hardware List
 | Chapter | Software/Hardware required | OS required |
